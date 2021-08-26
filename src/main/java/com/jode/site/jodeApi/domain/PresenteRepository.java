@@ -11,4 +11,6 @@ public interface PresenteRepository {
     Optional<Presente> findById(Long id);
 
     List<Presente> findByCategoriaId(Long categoriaId);
+
+    void deleteById(Long id);
 }

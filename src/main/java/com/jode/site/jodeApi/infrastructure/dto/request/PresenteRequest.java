@@ -12,4 +12,5 @@ public class PresenteRequest {
     private boolean disponibilidade;
     private String link;
     private String imagem;
+    private String senha;
 }

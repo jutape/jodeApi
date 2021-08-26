@@ -48,4 +48,26 @@ public class PresenteData {
     public List<Presente> getAllByCategoria(Long idCategoria) {
         return this.presenteRepository.findByCategoriaId(idCategoria);
     }
+    public Presente edit(PresenteRequest presenteRequest, Long id) {
+        Optional<Presente> presente = this.presenteRepository.findById(id);
+        Optional<Categoria> categoria = this.categoriaData.getById(presenteRequest.getCategoria());
+        if(categoria.isPresent() && presente.isPresent()) {
+            Presente presenteEditado = presente.get();
+            presenteEditado.setNome(presenteRequest.getNome());
+            presenteEditado.setDisponibilidade(presenteRequest.isDisponibilidade());
+            presenteEditado.setCategoria(categoria.get());
+            presenteEditado.setPreco(presenteRequest.getPreco());
+            presenteEditado.setLink(presenteRequest.getLink());
+            presenteEditado.setImagem(presenteRequest.getImagem());
+            return this.presenteRepository.save(presenteEditado);
+        } else {
+            return null;
+        }
+
+    }
+
+    public void delete(Long id) {
+        this.presenteRepository.deleteById(id);
+    }
+
 }
